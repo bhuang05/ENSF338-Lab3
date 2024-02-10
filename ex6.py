@@ -48,6 +48,11 @@ def binarysearch(data, first, last, key):
         return binarysearch(data, mid+1, last, key)
     return -1
 
+def searchandsort(arr, key):
+    sorted_nums = quicksort(arr, 0, len(arr) - 1)
+    index = binarysearch(sorted_nums, 0, len(arr) - 1, key)
+    return index
+
 lintimes = []
 bintimes = []
 
@@ -58,18 +63,15 @@ for length in listlengths:
     binrez = []
     for i in range (100):
         random.shuffle(numbers)
-        sortednums = quicksort(numbers, 0 , len(numbers)-1)
         
+        lineartime =  timeit.timeit(lambda: linearsearch(numbers, 1), number=1)
+        binarytime =  timeit.timeit(lambda: searchandsort(numbers, 1), number=1)
         
-        lineartime =  timeit.timeit(lambda: linearsearch(numbers, 1), number=100)
-
-        binarytime =  timeit.timeit(lambda: binarysearch(sortednums, 0, len(sortednums)-1, 1), number=100)
-        
-        linrez.append(lineartime/100)
-        binrez.append(binarytime/100)
+        linrez.append(lineartime)
+        binrez.append(binarytime)
     
     linavg = sum(linrez) / len(linrez)
-    binavg = sum(binrez) / len(linrez)
+    binavg = sum(binrez) / len(binrez)
 
     lintimes.append(linavg)
     bintimes.append(binavg)
@@ -82,5 +84,5 @@ plt.title('Average Speed of Linear and Binary Search')
 plt.legend()
 plt.show()
 
-
-
+#The binary search and quicksort times are much higher than the linear search times as we can see from the graph. This can likely be attributed to the added on sorting time included 
+# in the binary search algorithm 
