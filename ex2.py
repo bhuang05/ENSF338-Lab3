@@ -45,7 +45,7 @@ def partition(arr, low, high):
     return right
 
 
-# Creating arrays from size 1-20
+# Creating arrays from size 1-20 
 sizes = [i**2 for i in range(1, 21)]
 
 # Array intialization
@@ -81,13 +81,23 @@ plt.legend()
 plt.savefig('ex2.jpg')
 plt.clf()
 
+
 # Best case, average case and worst case for bubblesort. Generated with ChatGPT
-# Best case: O(n), already sorted
-best_bubble = [i for i in range(1, 1000)]
-# Average case: O(n^2), random order
-average_bubble = [random.randint(0,10000) for i in range(1,1000)]
-# Worst case: O(n^2), in descending order
-worst_bubble = [i for i in range(1000, 1, -1)]
+best_bubble = []
+average_bubble = []
+worst_bubble = []
+for size in sizes:
+    # Best case: O(n), already sorted
+    a = [i for i in range(size)]
+    # Average case: O(n^2), random order
+    b = [random.randint(0,10000) for i in range(size)]
+    # Worst case: O(n^2), in descending order
+    c = [i for i in range(size, 0, -1)]
+    # Appending to lists
+    best_bubble.append(a)
+    average_bubble.append(b)
+    worst_bubble.append(c)
+
 
 # Best case, average case and worst case for quicksort.
 # Best case: O(nlogn), random order
@@ -97,24 +107,66 @@ average_quick = copy.deepcopy(average_bubble)
 # Worst case: O(n^2), in descending order or asecending order (already sorted)
 worst_quick = copy.deepcopy(best_bubble)
 
-# Timing bubblesort cases 10 times
-time_best_bubble = timeit.timeit(lambda: bubblesort(best_bubble), number=1)
-time_average_bubble = timeit.timeit(lambda: bubblesort(average_bubble), number=1)
-time_worst_bubble = timeit.timeit(lambda: bubblesort(worst_bubble), number=1)
+bestcase_bubble_times = []
+averagecase_bubble_times = []
+worstcase_bubble_times = []
 
-# Timing quicksort cases 10 times
-time_best_quick = timeit.timeit(lambda: quicksort(best_quick, 0, len(best_quick) - 1), number=1)
-time_average_quick = timeit.timeit(lambda: quicksort(average_quick, 0, len(average_quick) -1), number=1)
-time_worst_quick = timeit.timeit(lambda: quicksort(worst_quick, 0, len(worst_quick) - 1), number=1)
+bestcase_quick_times = []
+averagecase_quick_times = []
+worstcase_quick_times = []
 
-# Plot the results, generated with ChatGPT
-plt.plot(['Best Case', 'Average Case', 'Worst Case'], [time_best_bubble, time_average_bubble, time_worst_bubble], label='Bubble Sort')
-plt.plot(['Best Case', 'Average Case', 'Worst Case'], [time_best_quick, time_average_quick, time_worst_quick], label='Quick Sort')
-plt.xlabel('Case')
-plt.ylabel('Time (s)')
-plt.title('Comparison of Bubble Sort and Quick Sort')
+
+# Timing and graphing the best cases of each algorithim against eachother
+for arr in best_bubble:
+    bestcase_bubble_times.append(timeit.timeit(lambda: bubblesort(arr), number = 1 ))
+
+for arr in best_quick:
+    bestcase_quick_times.append(timeit.timeit(lambda: quicksort(arr, 0, len(arr) - 1), number = 1 ))
+
+plt.plot(sizes, bestcase_bubble_times, color = 'red', marker = 'o', label = 'Bubble Sort')
+plt.plot(sizes, bestcase_quick_times, color = 'blue', marker = 'o', label = 'Quick Sort')
+plt.xlabel('Array Size') 
+plt.ylabel('Execution Time (seconds)')
+plt.title('Best Case Quick Sort vs Best Case Bubble Sort')
 plt.legend()
-plt.savefig('ex2_cases.jpg')
+plt.savefig('BC.jpg')
+plt.clf()
+
+
+# Timing and graphing the average cases of each algorithm against eachother
+for arr in average_bubble:
+    averagecase_bubble_times.append(timeit.timeit(lambda: bubblesort(arr), number = 1))
+
+for arr in average_quick:
+    averagecase_quick_times.append(timeit.timeit(lambda: quicksort(arr, 0, len(arr) - 1), number = 1))
+
+plt.plot(sizes, averagecase_bubble_times, color = 'red', marker = 'o', label = 'Bubble Sort')
+plt.plot(sizes, averagecase_quick_times, color = 'blue', marker = 'o', label = 'Quick Sort')
+plt.xlabel('Array Size')
+plt.ylabel('Execution Time (seconds)')
+plt.title('Average Case Quick Sort vs Average Case Bubble Sort')
+plt.legend()
+plt.savefig('AC.jpg')
+plt.clf()
+
+
+# Timing and graphing the worst cases of each algorithim against eachother
+for arr in worst_bubble:
+    worstcase_bubble_times.append(timeit.timeit(lambda: bubblesort(arr), number = 1))
+
+for arr in worst_quick:
+    worstcase_quick_times.append(timeit.timeit(lambda: quicksort(arr, 0, len(arr) - 1), number= 1 ))
+
+plt.plot(sizes, worstcase_bubble_times, color = 'blue', marker = 'o', label = 'Bubble Sort')
+plt.plot(sizes, worstcase_quick_times, color = 'red',  marker = 'o', label = 'Quick Sort')
+plt.xlabel('Array Size')
+plt.ylabel('Execution Time (seconds)')
+plt.title('Worst Case Quick Sort vs Worst Case Bubble Sort')
+plt.legend()
+plt.savefig('WC.jpg')
+plt.clf()
+
+
 
 
 
