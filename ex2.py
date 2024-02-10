@@ -2,7 +2,6 @@ import sys
 import random
 import timeit
 import copy
-import math
 import matplotlib.pyplot as plt
 sys.setrecursionlimit(20000)
 
