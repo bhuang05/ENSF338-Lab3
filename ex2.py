@@ -78,31 +78,31 @@ plt.xlabel('Array Size')
 plt.ylabel('Execution Time (seconds)')
 plt.title('Bubble Sort vs Quick Sort')
 plt.legend()
-plt.savefig('ex1.jpg')
+plt.savefig('ex2.jpg')
 plt.clf()
 
 # Best case, average case and worst case for bubblesort. Generated with ChatGPT
 # Best case: O(n), already sorted
-best_bubble = [i for i in range(1, 2500)]
+best_bubble = [i for i in range(1, 1000)]
 # Average case: O(n^2), random order
-average_bubble = [random.randint(0,10000) for i in range(1,2500)]
+average_bubble = [random.randint(0,10000) for i in range(1,1000)]
 # Worst case: O(n^2), in descending order
-worst_bubble = [i for i in range(2500, 1, -1)]
+worst_bubble = [i for i in range(1000, 1, -1)]
 
-# Best case, average case and worst case for quicksort. Generated with ChatGPT
-# Best case: O(nlogn), already sorted
-best_quick = copy.deepcopy(best_bubble)
+# Best case, average case and worst case for quicksort.
+# Best case: O(nlogn), random order
+best_quick = copy.deepcopy(average_bubble)
 # Average case: O(nlogn), random order
 average_quick = copy.deepcopy(average_bubble)
-# Worst case: O(n^2), in descending order
-worst_quick = copy.deepcopy(worst_bubble)
+# Worst case: O(n^2), in descending order or asecending order (already sorted)
+worst_quick = copy.deepcopy(best_bubble)
 
-# Timing bubblesort cases
+# Timing bubblesort cases 10 times
 time_best_bubble = timeit.timeit(lambda: bubblesort(best_bubble), number=1)
 time_average_bubble = timeit.timeit(lambda: bubblesort(average_bubble), number=1)
 time_worst_bubble = timeit.timeit(lambda: bubblesort(worst_bubble), number=1)
 
-# Timing quicksort cases
+# Timing quicksort cases 10 times
 time_best_quick = timeit.timeit(lambda: quicksort(best_quick, 0, len(best_quick) - 1), number=1)
 time_average_quick = timeit.timeit(lambda: quicksort(average_quick, 0, len(average_quick) -1), number=1)
 time_worst_quick = timeit.timeit(lambda: quicksort(worst_quick, 0, len(worst_quick) - 1), number=1)
@@ -114,7 +114,7 @@ plt.xlabel('Case')
 plt.ylabel('Time (s)')
 plt.title('Comparison of Bubble Sort and Quick Sort')
 plt.legend()
-plt.savefig('ex1_cases.jpg')
+plt.savefig('ex2_cases.jpg')
 
 
 
