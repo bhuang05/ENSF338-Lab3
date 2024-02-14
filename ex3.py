@@ -11,9 +11,9 @@ def bubble_sort(arr):
 
     n = len(arr)
     for i in range(n):
-        # Increments the comparison count
-        comparisons += 1
         for j in range(0, n-i-1):
+            # Increments the comparison count
+            comparisons += 1
             if arr[j] > arr[j+1]:
                 # Increments the swap count
                 swaps +=1
@@ -39,7 +39,7 @@ def generate_array(input_size):
 
 def main():
     # Generating arrays of different input sizes to be used in bubble sort.
-    input_sizes = [2, 4, 8, 16, 32, 64, 128, 256]
+    input_sizes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
     comparisons_data = []
     swaps_data = []
