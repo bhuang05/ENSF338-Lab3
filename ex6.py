@@ -84,5 +84,7 @@ plt.title('Average Speed of Linear and Binary Search')
 plt.legend()
 plt.show()
 
-#The binary search and quicksort times are much higher than the linear search times as we can see from the graph. This can likely be attributed to the added on sorting time included 
-# in the binary search algorithm 
+#The binary search and quicksort times are much higher than the linear search times as we can see from the graph. 
+#In theory, the search and sort should be faster, which can be seen by analyzing the combined time complexity. 
+# This varied data can likely be attributed to the added on sorting time included 
+# in the binary search algorithm. 
